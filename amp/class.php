@@ -62,6 +62,7 @@ class ampress
 			$width = $size[0];
 			$height = $size[1];
 		}
+		if( $width === null || $width == '' || $height === null || $height == '' ) { return; }
 		return '<div class="amp-img-container"><amp-img'.(($class !== null)?(' class="'.$class.'"'):('')).' src="'.$url.'" width="'.$width.'" height="'.$height.'" layout="responsive"></amp-img></div>';
 	}
 
