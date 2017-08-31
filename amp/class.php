@@ -50,7 +50,7 @@ class ampress
 		return false;
 	}
 
-	public static function showImage($url, $class = null, $width = null, $height = null)
+	public static function showImage($url, $class = null, $width = null, $height = null, $layout = 'responsive')
 	{
 		if( strpos($url, 'http') !== 0 )
 		{
@@ -58,12 +58,18 @@ class ampress
 		}
 		if( $width === null || $height === null )
 		{
-		$size = getimagesize($url);
-			$width = $size[0];
-			$height = $size[1];
+			$size = getimagesize($url);
+			if( $width === null )
+			{
+				$width = $size[0];
+			}
+			if( $height === null ) 
+			{
+				$height = $size[1];
+			}
 		}
 		if( $width === null || $width == '' || $height === null || $height == '' ) { return; }
-		return '<div class="amp-img-container"><amp-img'.(($class !== null)?(' class="'.$class.'"'):('')).' src="'.$url.'" width="'.$width.'" height="'.$height.'" layout="responsive"></amp-img></div>';
+		return '<div class="amp-img-container"><amp-img'.(($class !== null)?(' class="'.$class.'"'):('')).' src="'.$url.'" width="'.$width.'" height="'.$height.'" layout="'.$layout.'"></amp-img></div>';
 	}
 
 	public static function showVideo($url)
