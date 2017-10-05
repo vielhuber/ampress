@@ -72,6 +72,26 @@ class ampress
 		return '<div class="amp-img-container"><amp-img'.(($class !== null)?(' class="'.$class.'"'):('')).' src="'.$url.'" width="'.$width.'" height="'.$height.'" layout="'.$layout.'"></amp-img></div>';
 	}
 
+	public static function showCarouselBegin($image)
+	{
+		// currently amp-carousel has not the ability to automatically preserve the aspect ratio
+		// we therefore get the ratio of the image via php
+		$carousel_ratio = 100;
+		if( $image !== null )
+		{
+			list($carousel_width, $carousel_height) = getimagesize($image);
+			$carousel_ratio = (($carousel_height/$carousel_width)*100);
+			// add some extra margin (for subtitles etc.)
+			$carousel_ratio += 10;
+		}
+		return '<amp-carousel width="100" height="'.$carousel_ratio.'" layout="responsive" type="slides">';
+	}
+
+	public static function showCarouselEnd()
+	{
+		return '</amp-carousel>';
+	}
+
 	public static function showVideo($url)
 	{
 		if( strpos($url, 'vimeo') !== false )
