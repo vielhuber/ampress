@@ -56,9 +56,11 @@ class ampress
 		{
 			$url = get_bloginfo('template_directory').'/images/'.$url;
 		}
-		if( $width === null || $height === null )
-		{
-			$size = getimagesize($url);
+        if( $width === null || $height === null )
+        {
+            // replace url with docroot
+            $docroot = str_replace(site_url(),$_SERVER['DOCUMENT_ROOT'],$url);
+            $size = getimagesize($docroot);
 			if( $width === null )
 			{
 				$width = $size[0];
@@ -79,7 +81,9 @@ class ampress
 		$carousel_ratio = 100;
 		if( $image !== null )
 		{
-			list($carousel_width, $carousel_height) = getimagesize($image);
+            // replace url with docroot
+            $docroot = str_replace(site_url(),$_SERVER['DOCUMENT_ROOT'],$image);
+            list($carousel_width, $carousel_height) = getimagesize($docroot);
 			$carousel_ratio = (($carousel_height/$carousel_width)*100);
 			// add some extra margin (for subtitles etc.)
 			$carousel_ratio += 10;
