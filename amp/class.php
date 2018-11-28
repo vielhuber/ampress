@@ -116,6 +116,26 @@ class ampress
 	{
 		// strip out style tags
 		$text = preg_replace('/(<[^>]+) style=".*?"/i', '$1', $text);
+        // strip out empty paragraphs
+        $text = str_replace('<p ><strong>'.html_entity_decode('&nbsp;').'</strong></p>','',$text);
+        $text = str_replace('<p ><strong>&nbsp;</strong></p>','',$text);
+        $text = str_replace('<p ><strong> </strong></p>','',$text);
+        $text = str_replace('<p><strong>&nbsp;</strong></p>','',$text);
+        $text = str_replace('<p><strong> </strong></p>','',$text);
+        $text = str_replace('<p><strong>'.html_entity_decode('&nbsp;').'</strong></p>','',$text);
+        $text = str_replace('<h2><strong>'.html_entity_decode('&nbsp;').'</strong></h2>','',$text);
+        $text = str_replace('<h3>'.html_entity_decode('&nbsp;').'</h3>','',$text);
+        $text = str_replace('<h3>&nbsp;</h3>','',$text);
+        $text = str_replace('<h2>'.html_entity_decode('&nbsp;').'</h2>','',$text);
+        $text = str_replace('<h2>&nbsp;</h2>','',$text);
+        $text = str_replace('<pre>'.html_entity_decode('&nbsp;').'</pre>','',$text);
+        $text = str_replace('<pre>&nbsp;</pre>','',$text);
+        $text = str_replace('<pre> </pre>','',$text);
+        $text = str_replace('<p>&nbsp;</p>','',$text);
+        $text = str_replace('<p>'.html_entity_decode('&nbsp;').'</p>','',$text);
+        $text = str_replace('<p></p>','',$text);
+        // replace img with amp-img
+        $text = str_replace('<img ','<amp-img ',$text);
 		return $text;
 	}
 
